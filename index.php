@@ -27,7 +27,7 @@ Kirby::plugin('datenliebe/sitemap', [
                 });
 
                 $sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-                $sitemap .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">";
+                $sitemap .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">";
 
                 if (kirby()->multilang()) {
                     foreach ($pages as $page) {
@@ -35,7 +35,9 @@ Kirby::plugin('datenliebe/sitemap', [
                             $sitemap .= "<url>";
                             $sitemap .= "<loc>" . html($page->url($language->code())) . "</loc>";
                             $sitemap .= "<lastmod>" . $page->modified('Y-m-d') . "</lastmod>";
-                            $sitemap .= "<xhtml:link rel=\"alternate\" hreflang=\"" . $language->code() . "\" href=\"" . html($page->url($language->code())) . "\" />";
+                            foreach (kirby()->languages() as $altLanguage) {
+                                $sitemap .= "<xhtml:link rel=\"alternate\" hreflang=\"" . $altLanguage->code() . "\" href=\"" . html($page->url($altLanguage->code())) . "\" />";
+                            }
                             $sitemap .= "</url>";
                         }
                     }
@@ -49,6 +51,7 @@ Kirby::plugin('datenliebe/sitemap', [
                 }
 
                 $sitemap .= "</urlset>";
+
 
                 return new Kirby\Http\Response($sitemap, 'application/xml');
             }
