@@ -65,7 +65,7 @@ If `includeUnlisted` is set to `true`, unlisted (published) pages will also be i
 
 ### Multilingual Sitemap
 
-For multilingual sites, the plugin automatically includes alternate language URLs in the sitemap. Each page entry will have an `<xhtml:link>` tag pointing to its translations.
+For multilingual sites, the plugin automatically includes alternate language URLs in the sitemap. Each page entry will have a `<xhtml:link>` tag pointing to its translations.
 
 #### Example Output for Multilingual Sites
 
@@ -83,6 +83,7 @@ For multilingual sites, the plugin automatically includes alternate language URL
 ### Sitemap Priority
 
 Pages are included in the sitemap based on the following priority:
+
 1. All listed pages (published and visible).
 2. Additional unlisted pages (if `includeUnlisted` is set to `true`).
 3. Pages explicitly ignored via the default or custom ignore lists.
@@ -114,7 +115,7 @@ With custom ignore pages and multilingual support, the generated `sitemap.xml` m
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://example.com/page</loc>
     <lastmod>2024-12-31</lastmod>
@@ -134,10 +135,10 @@ With custom ignore pages and multilingual support, the generated `sitemap.xml` m
 
 The following options can be set in your `config.php`:
 
-| Option                            | Description                                   | Default     |
-|-----------------------------------|-----------------------------------------------|-------------|
-| `datenliebe.sitemap.ignore`       | Array of page IDs to ignore in the sitemap    | `[]`        |
-| `datenliebe.sitemap.includeUnlisted` | Include unlisted (draft) pages in the sitemap | `false`      |
+| Option                               | Description                                   | Default |
+| ------------------------------------ | --------------------------------------------- | ------- |
+| `datenliebe.sitemap.ignore`          | Array of page IDs to ignore in the sitemap    | `[]`    |
+| `datenliebe.sitemap.includeUnlisted` | Include unlisted (draft) pages in the sitemap | `false` |
 
 ---
 
