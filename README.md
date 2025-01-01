@@ -30,7 +30,7 @@ The **datenliebe/kirby-sitemap** plugin for Kirby CMS simplifies the generation 
 
 ### Default Behavior
 
-By default, the plugin generates a `sitemap.xml` file that includes all listed (published and visible) pages except those specified in the default ignore list:
+By default, the plugin generates a `sitemap.xml` file that includes all listed pages except those specified in the default ignore list:
 
 - `error`
 
@@ -60,7 +60,7 @@ With the above configuration, your sitemap will exclude the following pages:
 - `secret-page`
 - `another-hidden-page`
 
-If `includeUnlisted` is set to `true`, unlisted (draft) pages will also be included in the sitemap.
+If `includeUnlisted` is set to `true`, unlisted (published) pages will also be included in the sitemap.
 
 ---
 
@@ -119,7 +119,7 @@ The following options can be set in your `config.php`:
 | Option                            | Description                                   | Default     |
 |-----------------------------------|-----------------------------------------------|-------------|
 | `datenliebe.sitemap.ignore`       | Array of page IDs to ignore in the sitemap    | `[]`        |
-| `datenliebe.sitemap.includeUnlisted` | Include unlisted (draft) pages in the sitemap | `true`      |
+| `datenliebe.sitemap.includeUnlisted` | Include unlisted (draft) pages in the sitemap | `false`      |
 
 ---
 
