@@ -1,18 +1,15 @@
 <?php
 
 Kirby::plugin('datenliebe/sitemap', [
-    // Serve the sitemap.xml route
+    'snippets' => [
+        'sitemap' => __DIR__ . '/snippets/sitemap.php',
+    ],
     'routes' => [
         [
             'pattern' => 'sitemap.xml',
             'method' => 'GET',
             'action' => function () {
-                // Default ignored pages
-                $defaultIgnorePages = [
-                    'error',
-                ];
-
-                // Custom ignored pages from config.php
+                $defaultIgnorePages = ['error'];
                 $customIgnorePages = option('datenliebe.sitemap.ignore', []);
                 $ignorePages = array_merge($defaultIgnorePages, $customIgnorePages);
 
@@ -26,41 +23,15 @@ Kirby::plugin('datenliebe/sitemap', [
                     return !in_array($page->id(), $ignorePages);
                 });
 
-                $sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-                $sitemap .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">";
-
-                if (kirby()->multilang()) {
-                    foreach ($pages as $page) {
-                        foreach (kirby()->languages() as $language) {
-                            $sitemap .= "<url>";
-                            $sitemap .= "<loc>" . html($page->url($language->code())) . "</loc>";
-                            $sitemap .= "<lastmod>" . $page->modified('Y-m-d') . "</lastmod>";
-                            foreach (kirby()->languages() as $altLanguage) {
-                                $sitemap .= "<xhtml:link rel=\"alternate\" hreflang=\"" . $altLanguage->code() . "\" href=\"" . html($page->url($altLanguage->code())) . "\" />";
-                            }
-                            $sitemap .= "</url>";
-                        }
-                    }
-                } else {
-                    foreach ($pages as $page) {
-                        $sitemap .= "<url>";
-                        $sitemap .= "<loc>" . html($page->url()) . "</loc>";
-                        $sitemap .= "<lastmod>" . $page->modified('Y-m-d') . "</lastmod>";
-                        $sitemap .= "</url>";
-                    }
-                }
-
-                $sitemap .= "</urlset>";
-
-
-                return new Kirby\Http\Response($sitemap, 'application/xml');
+                return new Kirby\Http\Response(
+                    snippet('sitemap', compact('pages'), true),
+                    'application/xml'
+                );
             }
         ]
     ],
-
-    // Default plugin options
     'options' => [
-        'includeUnlisted' => false, // Whether to include unlisted pages
-        'ignore' => [], // Custom pages to ignore
+        'includeUnlisted' => false,
+        'ignore' => [],
     ]
 ]);

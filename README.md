@@ -1,4 +1,3 @@
-
 # Kirby sitemap.xml Plugin
 
 The **datenliebe/kirby-sitemap** plugin for Kirby CMS simplifies the generation of a dynamic `sitemap.xml` file. It allows you to define default ignored pages, extend the list with custom pages via `config.php`, and dynamically serve the combined sitemap.
@@ -87,6 +86,25 @@ Pages are included in the sitemap based on the following priority:
 1. All listed pages (published and visible).
 2. Additional unlisted pages (if `includeUnlisted` is set to `true`).
 3. Pages explicitly ignored via the default or custom ignore lists.
+
+---
+
+### Providing the Snippet with the Plugin
+
+The sitemap XML generation logic is implemented in a snippet included with the plugin. This ensures the plugin is fully self-contained and easy to use without requiring manual snippet creation.
+
+#### Plugin Structure
+
+The plugin includes the snippet in its directory structure:
+
+```
+site/plugins/sitemap/
+├── index.php
+├── snippets/
+│   └── sitemap.php
+```
+
+The `sitemap.php` snippet is registered with the plugin and is automatically used to generate the sitemap content.
 
 ---
 
