@@ -1,6 +1,6 @@
 <?php
 
-Kirby::plugin('datenliebe/sitemap', [
+Kirby::plugin('datenliebe/kirby-sitemap', [
     'snippets' => [
         'sitemap' => __DIR__ . '/snippets/sitemap.php',
     ],

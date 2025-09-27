@@ -1,5 +1,5 @@
 {
-	"name": "datenliebe/sitemap",
+	"name": "datenliebe/kirby-sitemap",
 	"description": "A sitemap generator for Kirby CMS.",
 	"license": "MIT",
 	"type": "kirby-plugin",
